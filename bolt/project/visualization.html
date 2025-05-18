@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FamilyTree - Visualization</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/visualization.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="main-container">
+        <nav class="navbar">
+            <div class="logo">
+                <img src="images/logo.svg" alt="FamilyTree Logo">
+                <h1>FamilyTree</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="form.html">Add Members</a></li>
+                <li><a href="visualization.html" class="active">Family Tree</a></li>
+                <li><a href="data.html">Analytics</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div> 
+        </nav>
+
+        <header class="page-header">
+            <h1>Family Tree Visualization</h1>
+            <p>Explore your family connections visually.</p>
+        </header>
+
+        <section class="visualization-controls">
+            <div class="controls-left">
+                <div class="zoom-controls">
+                    <button id="zoomIn" class="btn-icon"><i class="fas fa-plus"></i></button>
+                    <button id="zoomReset" class="btn-icon"><i class="fas fa-sync-alt"></i></button>
+                    <button id="zoomOut" class="btn-icon"><i class="fas fa-minus"></i></button>
+                </div>
+            </div>
+            <div class="controls-right">
+                <button id="printTree" class="btn-secondary"><i class="fas fa-print"></i> Print Tree</button>
+                <select id="layoutType">
+                    <option value="vertical">Vertical Layout</option>
+                    <option value="horizontal">Horizontal Layout</option>
+                    <option value="radial">Radial Layout</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="visualization-container">
+            <div class="tree-container" id="familyTreeContainer">
+                <!-- Family tree will be rendered here by JavaScript -->
+                <div class="loading-tree">
+                    <p>No family members added yet. Add members to visualize your family tree.</p>
+                    <a href="form.html" class="btn-primary">Add Family Members</a>
+                </div>
+            </div>
+            
+            <div class="legend">
+                <h3>Legend</h3>
+                <div class="legend-item">
+                    <div class="legend-color male"></div>
+                    <p>Male</p>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color female"></div>
+                    <p>Female</p>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color other"></div>
+                    <p>Other/Not specified</p>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-line marriage"></div>
+                    <p>Marriage</p>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-line parent-child"></div>
+                    <p>Parent-Child</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="member-details-panel" id="memberDetailsPanel">
+            <div class="panel-header">
+                <h3>Family Member Details</h3>
+                <button class="close-panel"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="panel-content">
+                <!-- Member details will be loaded here via JavaScript -->
+                <p class="select-message">Select a family member from the tree to view details.</p>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/logo.svg" alt="FamilyTree Logo">
+                    <h2>FamilyTree</h2>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="form.html">Add Members</a></li>
+                        <li><a href="visualization.html">Family Tree</a></li>
+                        <li><a href="data.html">Analytics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope"></i> ukailulwan@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +6018-285-2033</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 FamilyTree. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="js/visualization.js"></script>
+</body>
+</html>
