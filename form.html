@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FamilyTree - Add Members</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head> 
+<body>
+    <div class="main-container">
+        <nav class="navbar">
+            <div class="logo">
+                <img src="images/logo.svg" alt="FamilyTree Logo">
+                <h1>FamilyTree</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="form.html" class="active">Add Members</a></li>
+                <li><a href="visualization.html">Family Tree</a></li>
+                <li><a href="data.html">Analytics</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+
+        <header class="page-header">
+            <h1>Add Family Members</h1>
+            <p>Fill out the form below to add new members to your family tree.</p>
+        </header>
+
+        <section class="search-section">
+            <div class="search-container">
+                <input type="text" id="memberSearch" placeholder="Search family members...">
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="action-buttons">
+                <button id="printBtn" class="btn-secondary"><i class="fas fa-print"></i> Print Members</button>
+                <a href="visualization.html" class="btn-primary"><i class="fas fa-sitemap"></i> View Tree</a>
+                <a href="data.html" class="btn-primary"><i class="fas fa-chart-bar"></i> View Analytics</a>
+            </div>
+        </section>
+
+        <section class="form-section">
+            <div class="form-guidance" style="background: #E8F1E8; color: #30382F; border-left: 5px solid #30382F; padding: 1rem; margin-bottom: 1.5rem; border-radius: 6px; font-size: 1rem;">
+                <strong>Tip:</strong> To build your family tree, first add yourself as <b>Self</b>. Then, add children by selecting <b>Child</b> as the relationship and choosing the parent in the <b>Related To</b> dropdown. Only parent-child relationships are shown in the tree. Other relationships (spouse, sibling, etc.) are not yet visualized.
+            </div>
+            <div class="form-card">
+                <h2>Family Member Details</h2>
+                <form id="familyMemberForm" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" name="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="relationship">Relationship *</label>
+                            <select id="relationship" name="relationship" required>
+                                <option value="" disabled selected>Select relationship</option>
+                                <option value="self">Self</option>
+                                <option value="spouse">Spouse</option>
+                                <option value="child">Child</option>
+                                <option value="parent">Parent</option>
+                                <option value="sibling">Sibling</option>
+                                <option value="grandparent">Grandparent</option>
+                                <option value="grandchild">Grandchild</option>
+                                <option value="aunt_uncle">Aunt/Uncle</option>
+                                <option value="niece_nephew">Niece/Nephew</option>
+                                <option value="cousin">Cousin</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="relatedTo">Related To</label>
+                            <select id="relatedTo" name="relatedTo">
+                                <option value="" disabled selected>Select existing member</option>
+                                <!-- Will be populated dynamically -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="birthDate">Birth Date</label>
+                            <input type="date" id="birthDate" name="birthDate">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="formState">State *</label>
+                            <select id="formState" name="state" required>
+                                <option value="" disabled selected>Select state</option>
+                                <option value="Johor">Johor</option>
+                                <option value="Kedah">Kedah</option>
+                                <option value="Kelantan">Kelantan</option>
+                                <option value="Melaka">Melaka</option>
+                                <option value="Negeri Sembilan">Negeri Sembilan</option>
+                                <option value="Pahang">Pahang</option>
+                                <option value="Perak">Perak</option>
+                                <option value="Perlis">Perlis</option>
+                                <option value="Pulau Pinang">Pulau Pinang</option>
+                                <option value="Sabah">Sabah</option>
+                                <option value="Sarawak">Sarawak</option>
+                                <option value="Selangor">Selangor</option>
+                                <option value="Terengganu">Terengganu</option>
+                                <option value="WP Kuala Lumpur">WP Kuala Lumpur</option>
+                                <option value="WP Labuan">WP Labuan</option>
+                                <option value="WP Putrajaya">WP Putrajaya</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="formOccupation">Occupation *</label>
+                            <input type="text" id="formOccupation" name="occupation" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="maritalStatus">Marital Status *</label>
+                            <select id="maritalStatus" name="status" required>
+                                <option value="" disabled selected>Select status</option>
+                                <option value="Single">Single</option>
+                                <option value="Married">Married</option>
+                                <option value="Divorced">Divorced</option>
+                                <option value="Widowed">Widowed</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="memberGender">Gender *</label>
+                            <select id="memberGender" name="gender" required>
+                                <option value="" disabled selected>Select gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label for="memberPhoto">Photo</label>
+                            <div class="photo-upload">
+                                <input type="file" id="memberPhoto" name="photo" accept="image/*">
+                                <div class="upload-preview">
+                                    <img id="photoPreview" src="images/profile-placeholder.png" alt="Photo Preview">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label for="memberNotes">Additional Notes</label>
+                            <textarea id="memberNotes" name="notes" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-buttons">
+                        <button type="reset" class="btn-secondary">Reset</button>
+                        <button type="submit" class="btn-primary">Add Member</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section class="members-list">
+            <h2>Family Members</h2>
+            <div class="members-grid" id="membersGrid">
+                <!-- Members will be loaded here via JavaScript -->
+                <div class="no-members-message">
+                    <p>No family members added yet. Use the form above to add your first member.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/logo.svg" alt="FamilyTree Logo">
+                    <h2>FamilyTree</h2>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="form.html">Add Members</a></li>
+                        <li><a href="visualization.html">Family Tree</a></li>
+                        <li><a href="data.html">Analytics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope"></i> ukailulwan@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +6018-285-2033</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 FamilyTree. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/jquery-3.7.1.js"></script>
+    <script src="js/form.js"></script>
+</body>
+</html>

@@ -1,0 +1,287 @@
+[
+    {
+        "id": "e847ddafe0300621",
+        "type": "tab",
+        "label": "Module 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4725c39f745d4af5",
+        "type": "rpi-gpio in",
+        "z": "e847ddafe0300621",
+        "name": "Button B",
+        "pin": "17",
+        "intype": "up",
+        "debounce": "25",
+        "read": false,
+        "bcm": true,
+        "x": 200,
+        "y": 320,
+        "wires": [
+            [
+                "d752d8eeacb5578d",
+                "824fcddcdc182f45"
+            ]
+        ]
+    },
+    {
+        "id": "d3319e388cb52d09",
+        "type": "rpi-gpio in",
+        "z": "e847ddafe0300621",
+        "name": "MQ-2 Sensor",
+        "pin": "27",
+        "intype": "up",
+        "debounce": "25",
+        "read": false,
+        "bcm": true,
+        "x": 210,
+        "y": 400,
+        "wires": [
+            [
+                "32baa4673fd47e0f",
+                "f66ae4763bd467b5"
+            ]
+        ]
+    },
+    {
+        "id": "2ebf99f6dec864e4",
+        "type": "rpi-gpio out",
+        "z": "e847ddafe0300621",
+        "name": "LED Output",
+        "pin": "4",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 610,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "e397ca2218e6171e",
+        "type": "rpi-gpio out",
+        "z": "e847ddafe0300621",
+        "name": "Buzzer Output",
+        "pin": "22",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 580,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "d752d8eeacb5578d",
+        "type": "function",
+        "z": "e847ddafe0300621",
+        "name": "Button Logic",
+        "func": "let enabled = flow.get(\"module2_enabled\") || false;\n\nif (enabled) {\n    // Reset condition\n    msg.payload = false;  // turns off LED and buzzer\n    return msg;\n}\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 320,
+        "wires": [
+            [
+                "2ebf99f6dec864e4",
+                "8f759d6cc5aedf2c"
+            ]
+        ]
+    },
+    {
+        "id": "32baa4673fd47e0f",
+        "type": "function",
+        "z": "e847ddafe0300621",
+        "name": "Gas Logic",
+        "func": "let enabled = flow.get(\"module2_enabled\") || false;\n\nif (enabled) {\n    let gasDetected = msg.payload === 1 || msg.payload === true;\n    if (gasDetected) {\n        // forward to LED and buzzer\n        return [msg, msg];\n    }\n}\n// Block the message if disabled\nreturn [null, null];",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 400,
+        "wires": [
+            [
+                "e397ca2218e6171e"
+            ]
+        ]
+    },
+    {
+        "id": "824fcddcdc182f45",
+        "type": "ui_switch",
+        "z": "e847ddafe0300621",
+        "name": "Button B",
+        "label": "Button B",
+        "tooltip": "",
+        "group": "3e024ef8b13889c8",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 400,
+        "y": 240,
+        "wires": [
+            [
+                "2ebf99f6dec864e4"
+            ]
+        ]
+    },
+    {
+        "id": "f66ae4763bd467b5",
+        "type": "ui_led",
+        "z": "e847ddafe0300621",
+        "order": 4,
+        "group": "3e024ef8b13889c8",
+        "width": 0,
+        "height": 0,
+        "label": "Gas Status",
+        "labelPlacement": "right",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "false",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "true",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "square",
+        "showGlow": true,
+        "name": "Gas Sensor",
+        "x": 410,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "8f759d6cc5aedf2c",
+        "type": "ui_led",
+        "z": "e847ddafe0300621",
+        "order": 5,
+        "group": "3e024ef8b13889c8",
+        "width": 0,
+        "height": 0,
+        "label": "Red LED",
+        "labelPlacement": "right",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "false",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "true",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Red LED",
+        "x": 600,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "e188472fef3ac312",
+        "type": "function",
+        "z": "e847ddafe0300621",
+        "name": "Enable Logic",
+        "func": "// Set the Enable status in flow context\nflow.set(\"module2_enabled\", msg.payload === true || msg.payload === \"true\");\nreturn null; // no message forwarding needed",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1f319d30fa689b32",
+        "type": "ui_switch",
+        "z": "e847ddafe0300621",
+        "name": "Enable",
+        "label": "Enable",
+        "tooltip": "",
+        "group": "3e024ef8b13889c8",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 200,
+        "y": 120,
+        "wires": [
+            [
+                "e188472fef3ac312"
+            ]
+        ]
+    },
+    {
+        "id": "3e024ef8b13889c8",
+        "type": "ui_group",
+        "name": "MODULE 2",
+        "tab": "2b253bfbb42b2f65",
+        "order": 2,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2b253bfbb42b2f65",
+        "type": "ui_tab",
+        "name": "WSMB 2025",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]

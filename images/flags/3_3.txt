@@ -1,0 +1,515 @@
+[
+    {
+        "id": "379d70902429170b",
+        "type": "tab",
+        "label": "Module 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e60657f0e4731c29",
+        "type": "mqtt out",
+        "z": "379d70902429170b",
+        "name": "Request DHT Data from ESP32",
+        "topic": "dht/request",
+        "qos": "1",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b296fd8cc5346c7c",
+        "x": 750,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "2375f5c569b74b88",
+        "type": "function",
+        "z": "379d70902429170b",
+        "name": "Check DHT Update On",
+        "func": "var enabled = flow.get('module3_enabled') || false;\nif (enabled && flow.get('dht_update') == true) {\n    msg.payload = 1;\n    return [msg];\n} else {\n    return null;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 180,
+        "wires": [
+            [
+                "81c4947aeb1ebede",
+                "e60657f0e4731c29"
+            ]
+        ]
+    },
+    {
+        "id": "463a15b6e938bdf8",
+        "type": "mqtt in",
+        "z": "379d70902429170b",
+        "name": "DHT Temp from ESP32",
+        "topic": "dht/temperature",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "b296fd8cc5346c7c",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 200,
+        "y": 240,
+        "wires": [
+            [
+                "a258e5b6ca046bfc"
+            ]
+        ]
+    },
+    {
+        "id": "a258e5b6ca046bfc",
+        "type": "ui_chart",
+        "z": "379d70902429170b",
+        "name": "Temperature",
+        "group": "a8a4a3d17703a16b",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "Temperature",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": true,
+        "ymin": "15",
+        "ymax": "45",
+        "removeOlder": "5",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#ff7f0e",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 410,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ec49c35c0ebdca28",
+        "type": "mqtt in",
+        "z": "379d70902429170b",
+        "name": "Ultrasonic Distance",
+        "topic": "ultrasonic/distance",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "b296fd8cc5346c7c",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 170,
+        "y": 340,
+        "wires": [
+            [
+                "083e7b502642c771",
+                "796b296551278d23"
+            ]
+        ]
+    },
+    {
+        "id": "083e7b502642c771",
+        "type": "function",
+        "z": "379d70902429170b",
+        "name": "If <20cm and Enable",
+        "func": "let dis = parseFloat(msg.payload);\nlet enabled = flow.get('module3_enabled') || false;\nif (enabled && (dis < 20)) {\n     // Build fswebcam command\n    msg.payload = \"fswebcam -r 1280x720 --no-banner --jpeg 100 -D 1 /home/pi/webcam/webcam_\" + new Date().getTime() + \".jpg\";\n    return [msg];\n}\nreturn null;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 340,
+        "wires": [
+            [
+                "b4b865a61f14b9dd",
+                "f269862454be4739"
+            ]
+        ]
+    },
+    {
+        "id": "f269862454be4739",
+        "type": "exec",
+        "z": "379d70902429170b",
+        "command": "",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "name": "fswebcam",
+        "x": 880,
+        "y": 340,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "c2eb056d66fbeec3",
+        "type": "mqtt out",
+        "z": "379d70902429170b",
+        "name": "Play Buzzer",
+        "topic": "buzzer/play",
+        "qos": "1",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b296fd8cc5346c7c",
+        "x": 710,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "fb63aa453d93a154",
+        "type": "ui_switch",
+        "z": "379d70902429170b",
+        "name": "Enable",
+        "label": "Enable",
+        "tooltip": "",
+        "group": "a8a4a3d17703a16b",
+        "order": 1,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "",
+        "topicType": "str",
+        "onvalue": "1",
+        "onvalueType": "num",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "num",
+        "officon": "",
+        "offcolor": "",
+        "animate": true,
+        "className": "",
+        "x": 160,
+        "y": 120,
+        "wires": [
+            [
+                "8f8a8246d36fd154"
+            ]
+        ]
+    },
+    {
+        "id": "f2da2969f1d2b4e6",
+        "type": "mqtt in",
+        "z": "379d70902429170b",
+        "name": "DHT Humi from ESP32",
+        "topic": "dht/humidity",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "b296fd8cc5346c7c",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 200,
+        "y": 280,
+        "wires": [
+            [
+                "fb6bfec3a52177e5"
+            ]
+        ]
+    },
+    {
+        "id": "fb6bfec3a52177e5",
+        "type": "ui_chart",
+        "z": "379d70902429170b",
+        "name": "Humidity",
+        "group": "a8a4a3d17703a16b",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "label": "Humidity",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": true,
+        "ymin": "10",
+        "ymax": "90",
+        "removeOlder": "5",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#0fffcf",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 400,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8f8a8246d36fd154",
+        "type": "function",
+        "z": "379d70902429170b",
+        "name": "Set Enable Flag",
+        "func": "flow.set(\"module3_enabled\", msg.payload);\nreturn null;",
+        "outputs": 0,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "b4b865a61f14b9dd",
+        "type": "debug",
+        "z": "379d70902429170b",
+        "name": "debug 11",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "5f541931f075d4b3",
+        "type": "inject",
+        "z": "379d70902429170b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 400,
+        "wires": [
+            [
+                "083e7b502642c771"
+            ]
+        ]
+    },
+    {
+        "id": "81c4947aeb1ebede",
+        "type": "debug",
+        "z": "379d70902429170b",
+        "name": "debug 12",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "7c2297b1f9f978f3",
+        "type": "ui_switch",
+        "z": "379d70902429170b",
+        "name": "DHT update",
+        "label": "DHT Enable",
+        "tooltip": "",
+        "group": "a8a4a3d17703a16b",
+        "order": 1,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "",
+        "topicType": "str",
+        "onvalue": "1",
+        "onvalueType": "num",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "num",
+        "officon": "",
+        "offcolor": "",
+        "animate": true,
+        "className": "",
+        "x": 150,
+        "y": 80,
+        "wires": [
+            [
+                "67cbe0188797205b"
+            ]
+        ]
+    },
+    {
+        "id": "67cbe0188797205b",
+        "type": "function",
+        "z": "379d70902429170b",
+        "name": "Set Enable DHT",
+        "func": "flow.set(\"dht_update\", msg.payload);\nreturn null;",
+        "outputs": 0,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "3940e79b511ddda1",
+        "type": "inject",
+        "z": "379d70902429170b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "15",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 180,
+        "wires": [
+            [
+                "2375f5c569b74b88"
+            ]
+        ]
+    },
+    {
+        "id": "796b296551278d23",
+        "type": "function",
+        "z": "379d70902429170b",
+        "name": "If <20cm and Enable",
+        "func": "let dis = parseFloat(msg.payload);\nlet enabled = flow.get('module3_enabled') || false;\nif (enabled && (dis < 20)) {\n    msg.payload = 1;\n    return [msg];\n}\nreturn null;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 400,
+        "wires": [
+            [
+                "c2eb056d66fbeec3"
+            ]
+        ]
+    },
+    {
+        "id": "b296fd8cc5346c7c",
+        "type": "mqtt-broker",
+        "name": "Mosquitto (Rpi)",
+        "broker": "10.73.99.210",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "5",
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "a8a4a3d17703a16b",
+        "type": "ui_group",
+        "name": "MODULE 3",
+        "tab": "2b253bfbb42b2f65",
+        "order": 3,
+        "disp": true,
+        "width": 12,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2b253bfbb42b2f65",
+        "type": "ui_tab",
+        "name": "WSMB 2025",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]

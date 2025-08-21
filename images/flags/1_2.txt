@@ -1,0 +1,630 @@
+[
+    {
+        "id": "a04d01b21027677b",
+        "type": "tab",
+        "label": "Module 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "debug-ledA",
+        "type": "debug",
+        "z": "a04d01b21027677b",
+        "name": "LED A Status",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 320,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "inject-ledA",
+        "type": "inject",
+        "z": "a04d01b21027677b",
+        "name": "Turn ON LED A",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "ON",
+        "payloadType": "str",
+        "x": 160,
+        "y": 160,
+        "wires": [
+            [
+                "mqtt-out-ledA"
+            ]
+        ]
+    },
+    {
+        "id": "mqtt-out-ledA",
+        "type": "mqtt out",
+        "z": "a04d01b21027677b",
+        "name": "",
+        "topic": "led/A",
+        "qos": "1",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b296fd8cc5346c7c",
+        "x": 320,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "800d0fad622068c5",
+        "type": "mqtt in",
+        "z": "a04d01b21027677b",
+        "name": "LED B",
+        "topic": "led/B",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b296fd8cc5346c7c",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 160,
+        "y": 240,
+        "wires": [
+            [
+                "da1996d5e2f5bf8a",
+                "70fe88498c75f25f"
+            ]
+        ]
+    },
+    {
+        "id": "da1996d5e2f5bf8a",
+        "type": "debug",
+        "z": "a04d01b21027677b",
+        "name": "LED B Status",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 330,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "a5a9a8da528d42dd",
+        "type": "inject",
+        "z": "a04d01b21027677b",
+        "name": "Turn ON LED B",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "ON",
+        "payloadType": "str",
+        "x": 160,
+        "y": 320,
+        "wires": [
+            [
+                "df296ab81df8f8d6"
+            ]
+        ]
+    },
+    {
+        "id": "df296ab81df8f8d6",
+        "type": "mqtt out",
+        "z": "a04d01b21027677b",
+        "name": "",
+        "topic": "led/B",
+        "qos": "0",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b296fd8cc5346c7c",
+        "x": 330,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "6072d8496d4efa3c",
+        "type": "mqtt in",
+        "z": "a04d01b21027677b",
+        "name": "LED C",
+        "topic": "led/C",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b296fd8cc5346c7c",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 150,
+        "y": 420,
+        "wires": [
+            [
+                "021f4c470ebb6c37",
+                "d106f79dd26409a7"
+            ]
+        ]
+    },
+    {
+        "id": "021f4c470ebb6c37",
+        "type": "debug",
+        "z": "a04d01b21027677b",
+        "name": "LED C Status",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 320,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "40c634b9deabb119",
+        "type": "inject",
+        "z": "a04d01b21027677b",
+        "name": "Turn ON LED C",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "ON",
+        "payloadType": "str",
+        "x": 150,
+        "y": 500,
+        "wires": [
+            [
+                "6079357359a86637"
+            ]
+        ]
+    },
+    {
+        "id": "6079357359a86637",
+        "type": "mqtt out",
+        "z": "a04d01b21027677b",
+        "name": "",
+        "topic": "led/C",
+        "qos": "2",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b296fd8cc5346c7c",
+        "x": 310,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "mqtt-in-ledA",
+        "type": "mqtt in",
+        "z": "a04d01b21027677b",
+        "name": "LED A",
+        "topic": "led/A",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b296fd8cc5346c7c",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 160,
+        "y": 100,
+        "wires": [
+            [
+                "debug-ledA",
+                "746230b0ad271385"
+            ]
+        ]
+    },
+    {
+        "id": "d3d338cbc79d5c07",
+        "type": "mqtt in",
+        "z": "a04d01b21027677b",
+        "name": "Button State",
+        "topic": "button/state",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "b296fd8cc5346c7c",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 570,
+        "y": 80,
+        "wires": [
+            [
+                "ad6d9340816fd53b",
+                "b751e19d78d9ef3b",
+                "a14452d9cc5b4dfb"
+            ]
+        ]
+    },
+    {
+        "id": "b751e19d78d9ef3b",
+        "type": "debug",
+        "z": "a04d01b21027677b",
+        "name": "Button A Status",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "a34d33d5023e5ca9",
+        "type": "mqtt out",
+        "z": "a04d01b21027677b",
+        "name": "",
+        "topic": "buttonA",
+        "qos": "1",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b296fd8cc5346c7c",
+        "x": 820,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "3375275650aa9f6e",
+        "type": "mqtt out",
+        "z": "a04d01b21027677b",
+        "name": "",
+        "topic": "module/enable",
+        "qos": "1",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b296fd8cc5346c7c",
+        "x": 820,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "875d5b9fb68bb742",
+        "type": "debug",
+        "z": "a04d01b21027677b",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "746230b0ad271385",
+        "type": "ui_led",
+        "z": "a04d01b21027677b",
+        "order": 2,
+        "group": "0be0bcc2337c751a",
+        "width": 0,
+        "height": 0,
+        "label": "LED A",
+        "labelPlacement": "right",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "OFF",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "ON",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "LED A",
+        "x": 300,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "ad6d9340816fd53b",
+        "type": "ui_led",
+        "z": "a04d01b21027677b",
+        "order": 5,
+        "group": "0be0bcc2337c751a",
+        "width": 0,
+        "height": 0,
+        "label": "BUTTON A",
+        "labelPlacement": "right",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "false",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "true",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "square",
+        "showGlow": true,
+        "name": "Button A",
+        "x": 820,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "70fe88498c75f25f",
+        "type": "ui_led",
+        "z": "a04d01b21027677b",
+        "order": 3,
+        "group": "0be0bcc2337c751a",
+        "width": 0,
+        "height": 0,
+        "label": "LED B",
+        "labelPlacement": "right",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "OFF",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "ON",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "LED B",
+        "x": 310,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "d106f79dd26409a7",
+        "type": "ui_led",
+        "z": "a04d01b21027677b",
+        "order": 4,
+        "group": "0be0bcc2337c751a",
+        "width": 0,
+        "height": 0,
+        "label": "LED C",
+        "labelPlacement": "right",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "OFF",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "ON",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "LED C",
+        "x": 300,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "b7a83760140141ac",
+        "type": "ui_time_scheduler",
+        "z": "a04d01b21027677b",
+        "group": "0be0bcc2337c751a",
+        "name": "",
+        "startDay": "1",
+        "refresh": 60,
+        "devices": [
+            "LED 1"
+        ],
+        "singleOff": false,
+        "onlySendChange": true,
+        "customPayload": false,
+        "eventMode": true,
+        "eventOptions": [
+            {
+                "label": "On",
+                "event": "true"
+            },
+            {
+                "label": "Off",
+                "event": "false"
+            }
+        ],
+        "sendTopic": false,
+        "lat": "",
+        "lon": "",
+        "customContextStore": "",
+        "outputs": 2,
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "x": 590,
+        "y": 340,
+        "wires": [
+            [],
+            [
+                "875d5b9fb68bb742"
+            ]
+        ]
+    },
+    {
+        "id": "a14452d9cc5b4dfb",
+        "type": "ui_switch",
+        "z": "a04d01b21027677b",
+        "name": "",
+        "label": "Button A",
+        "tooltip": "",
+        "group": "0be0bcc2337c751a",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 580,
+        "y": 160,
+        "wires": [
+            [
+                "ad6d9340816fd53b",
+                "a34d33d5023e5ca9"
+            ]
+        ]
+    },
+    {
+        "id": "cc5fa7b3f94ab5dc",
+        "type": "ui_switch",
+        "z": "a04d01b21027677b",
+        "name": "Enable",
+        "label": "Enable",
+        "tooltip": "",
+        "group": "0be0bcc2337c751a",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 580,
+        "y": 240,
+        "wires": [
+            [
+                "3375275650aa9f6e"
+            ]
+        ]
+    },
+    {
+        "id": "b296fd8cc5346c7c",
+        "type": "mqtt-broker",
+        "name": "Mosquitto (Rpi)",
+        "broker": "10.73.99.210",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "5",
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "0be0bcc2337c751a",
+        "type": "ui_group",
+        "name": "MODULE 1",
+        "tab": "2b253bfbb42b2f65",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2b253bfbb42b2f65",
+        "type": "ui_tab",
+        "name": "WSMB 2025",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
